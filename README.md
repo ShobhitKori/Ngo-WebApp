@@ -50,8 +50,6 @@ npm start
 
 The app will be available at `http://localhost:3000`.
 
-### Build for Production
-
 ## Project Structure
 
 ngo-webapp                                                              /<br>
