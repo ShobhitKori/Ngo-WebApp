@@ -1,6 +1,6 @@
 # NGO WebApp 🌍
 
-Empowering communities and changing lives through technology. This project is a responsive, user-friendly web application designed for Non-Governmental Organizations (NGOs) to showcase their mission, impact, and engagement opportunities.
+This React-based website for a Non-Profit Organization serves as a platform to connect donors with NGOs in need. The platform allows users to make monetary donations or contribute essential products to registered NGOs, ensuring that resources reach those who need them most. With a user-friendly interface, secure payment options, and a transparent tracking system, the website aims to promote a culture of giving and support community welfare.
 
 ## Features
 
@@ -86,7 +86,3 @@ For any inquiries or suggestions, please contact:
 
 - **Email:** [shobhitkori9@gmail.com](mailto:youremail@example.com)   [abhishekgithub19@gmail.comgmail.com](mailto:youremail@example.com)
 - **GitHub:** [Shobhit Kori](https://github.com/ShobhitKori)   [AbhisheK Kahar](https://github.com/abhishek19kahar)
-
----
-
-Thank you for supporting our mission! 🌟
