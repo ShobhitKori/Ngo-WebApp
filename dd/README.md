@@ -35,33 +35,40 @@ Ensure you have the following installed:
 
 1. Clone the repository:
 
-git clone [https://github.com/yourusername/ngo-webapp.git](https://github.com/ShobhitKori/Ngo-WebApp.git)
-cd ngo-webapp
+git clone [https://github.com/ShobhitKori/Npo-WebApp](https://github.com/ShobhitKori/Npo-WebApp.git)   <br>
+
+`cd Npo-WebApp`
 
 2. Install dependencies:
 
-npm install
+`npm install`
+
+Go to backend folder and install dependencies again:
+
+`cd backend` <br>
+
+`npm install`
 
 ### Running the App
 
 To start the development server:
 
-npm start
+`npm start`
 
-The app will be available at `http://localhost:3000`.
+The app will be available at `http://localhost:3000`
 
 ## Project Structure
 
-ngo-webapp                                                              /<br>
-├── public/             # Static files                                  /<br>
-├── src/                                                                /<br>
-│   ├── components/     # Reusable UI components                        /<br>
-│   ├── pages/          # Page components                               /<br>
-│   ├── ui/             # Custom UI elements (e.g., Card, Button)       /<br>
-│   ├── App.tsx         # Main app component                            /<br>
-│   └── index.tsx       # Entry point                                   /<br>
-├── package.json        # Project dependencies and scripts              /<br>
-└── README.md           # Project documentation                         /<br>
+ngo-webapp                                                              <br>
+├── public/             # Static files                                  <br>
+├── src/                                                                <br>
+│   ├── components/     # Reusable UI components                        <br>
+│   ├── pages/          # Page components                               <br>
+│   ├── ui/             # Custom UI elements (e.g., Card, Button)       <br>
+│   ├── App.tsx         # Main app component                            <br>
+│   └── index.tsx       # Entry point                                   <br>
+├── package.json        # Project dependencies and scripts              <br>
+└── README.md           # Project documentation                         <br>
 
 ## Contributing
 
@@ -81,9 +88,8 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 For any inquiries or suggestions, please contact:
 
-- **Email:** [shobhitkori9@gmail.com](mailto:youremail@example.com)
-- [abhishekgithub19@gmail.comgmail.com](mailto:youremail@example.com)
-- **GitHub:** [Shobhit Kori](https://github.com/ShobhitKori) [AbhisheK Kahar](https://github.com/abhishek19kahar)
+- **Email:** [shobhitkori9@gmail.com](mailto:youremail@example.com)   [abhishekgithub19@gmail.comgmail.com](mailto:youremail@example.com)
+- **GitHub:** [Shobhit Kori](https://github.com/ShobhitKori)   [AbhisheK Kahar](https://github.com/abhishek19kahar)
 
 ---
 
