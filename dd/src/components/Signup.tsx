@@ -7,11 +7,61 @@ import { Button } from "./ui/button.tsx"
 import { Input } from "./ui/input.tsx"
 import { Label } from "./ui/label.tsx"
 import { Checkbox } from "./ui/checkbox.tsx"
+import {  useNavigate } from 'react-router-dom'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "./ui/card.tsx"
 import { EyeIcon, EyeOffIcon } from 'lucide-react'
+import { handleError, handleSuccess } from './utils';
 
-export default function Login() {
+export default function Signup() {
   const [showPassword, setShowPassword] = useState(false)
+  const [signupInfo, setSignupInfo] = useState({
+    name: '',
+    email: '',
+    password: ''
+})
+  const navigate = useNavigate();
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    const copySignupInfo = { ...signupInfo };
+    copySignupInfo[name] = value;
+    console.log(name,value)
+    setSignupInfo(copySignupInfo);
+    console.log(signupInfo)
+
+}
+const handleSignup = async (e) => {
+  e.preventDefault();
+  const { name, email, password } = signupInfo;
+  console.log(signupInfo)
+  if (!name || !email || !password) {
+      return handleError('name, email and password are required')
+  }
+  try {
+      const url = `http://localhost:8080/auth/signup`;
+      const response = await fetch(url, {
+          method: "POST",
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(signupInfo)
+      });
+      const result = await response.json();
+      const { success, message, error } = result;
+      if (success) {
+          handleSuccess(message);
+          setTimeout(() => {
+              navigate('/signin')
+          }, 1000)
+      } else if (error) {
+          const details = error?.details[0].message;
+          handleError(details);
+      } else if (!success) {
+          handleError(message);
+      }
+  } catch (err) {
+      handleError(err);
+  }
+}
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-light">
@@ -26,16 +76,29 @@ export default function Login() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form className="space-y-4">
+          <form className="space-y-4" onSubmit={handleSignup}>
+            <div className="space-y-2">
+              <Label htmlFor="name">Full Name</Label>
+              <Input name="name"
+              onChange={handleChange}
+              placeholder="Enter your full name" required />
+            </div>
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
-              <Input id="email" type="email" placeholder="Enter your email" required />
+              <Input name="email"
+              onChange={handleChange}
+               type="email" placeholder="Enter your email" required />
             </div>
+            {/* <div className="space-y-2">
+              <Label htmlFor="phone">Phone</Label>
+              <Input id="phone"  placeholder="Enter your phone" required />
+            </div> */}
             <div className="space-y-2">
               <Label htmlFor="password">Password</Label>
               <div className="relative">
                 <Input 
-                  id="password" 
+                  name="password" 
+                  onChange={handleChange}
                   type={showPassword ? "text" : "password"}
                   placeholder="Create a password"
                   required 
@@ -98,9 +161,9 @@ export default function Login() {
               </Button>
             </div>
             <p className="text-center text-sm text-gray-500">
-              Don't have an account yet?{" "}
-              <a href="/signup" className="font-semibold text-purple-600 hover:underline">
-                Sign up
+              Already have an account?{" "}
+              <a href="/signin" className="font-semibold text-purple-600 hover:underline">
+                Sign in
               </a>
             </p>
           </form>
