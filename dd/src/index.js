@@ -7,6 +7,8 @@ import reportWebVitals from './reportWebVitals';
 import LandingPage from './components/LandingPage.tsx';
 import Signup from './components/Signup.tsx';
 import Login from './components/Login.tsx';
+import'react-toastify/ReactToastify.css'
+
 
 const router = createBrowserRouter([
   { path: "/", element: <LandingPage />},

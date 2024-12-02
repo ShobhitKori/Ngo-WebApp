@@ -1,4 +1,3 @@
-
 "use client"
 import React from "react"
 import { useState } from "react"
@@ -7,11 +6,64 @@ import { Button } from "./ui/button.tsx"
 import { Input } from "./ui/input.tsx"
 import { Label } from "./ui/label.tsx"
 import { Checkbox } from "./ui/checkbox.tsx"
+import {  useNavigate } from 'react-router-dom'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "./ui/card.tsx"
 import { EyeIcon, EyeOffIcon } from 'lucide-react'
+import { handleError, handleSuccess } from './utils.js';
 
-export default function Signup() {
+export default function Login() {
+
   const [showPassword, setShowPassword] = useState(false)
+  const [loginInfo, setLoginInfo] = useState({
+    email: '',
+    password: ''
+  })
+
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    const copyLoginInfo = { ...loginInfo };
+    copyLoginInfo[name] = value;
+    setLoginInfo(copyLoginInfo);
+  }
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    const { email, password } = loginInfo;
+    if (!email || !password) {
+      return handleError('email and password are required')
+    }
+    try {
+      const url = `http://localhost:8080/auth/login`;
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(loginInfo)
+      });
+      const result = await response.json();
+      const { success, message, jwtToken, name, error } = result;
+      if (success) {
+        handleSuccess(message);
+        localStorage.setItem('token', jwtToken);
+        localStorage.setItem('loggedInUser', name);
+        setTimeout(() => {
+          navigate('/user')
+        }, 1000)
+      } else if (error) {
+        const details = error?.details[0].message;
+        handleError(details);
+      } else if (!success) {
+        handleError(message);
+      }
+    } catch (err) {
+      handleError(err);
+    }
+  }
+
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-light">
@@ -26,32 +78,30 @@ export default function Signup() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="name">Full Name</Label>
-              <Input id="name" placeholder="Enter your full name" required />
-            </div>
+          <form className="space-y-4" onSubmit={handleLogin}>
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
-              <Input id="email" type="email" placeholder="Enter your email" required />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="phone">Phone</Label>
-              <Input id="phone"  placeholder="Enter your phone" required />
+              <Input
+                name="email"
+                type="email"
+                onChange={handleChange}
+                placeholder="Enter your email" required />
             </div>
             <div className="space-y-2">
               <Label htmlFor="password">Password</Label>
               <div className="relative">
-                <Input 
-                  id="password" 
+                <Input
+                  name="password"
                   type={showPassword ? "text" : "password"}
                   placeholder="Create a password"
-                  required 
+                  required
+                  onChange={handleChange}
                 />
                 <Button
                   type="button"
                   variant="ghost"
                   size="sm"
+
                   className="absolute right-2 top-1/2 -translate-y-1/2"
                   onClick={() => setShowPassword(!showPassword)}
                 >
@@ -73,7 +123,7 @@ export default function Signup() {
               </label>
             </div>
             <Button className="w-full bg-purple-600 hover:bg-purple-700" type="submit">
-              Sign Up
+              Login
             </Button>
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
@@ -106,9 +156,9 @@ export default function Signup() {
               </Button>
             </div>
             <p className="text-center text-sm text-gray-500">
-              Already have an account?{" "}
-              <a href="/signin" className="font-semibold text-purple-600 hover:underline">
-                Sign in
+              Don't have an account yet?{" "}
+              <a href="/signup" className="font-semibold text-purple-600 hover:underline">
+                Sign Up
               </a>
             </p>
           </form>
