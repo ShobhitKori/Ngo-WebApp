@@ -81,7 +81,8 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 For any inquiries or suggestions, please contact:
 
-- **Email:** [shobhitkori9@gmail.com](mailto:youremail@example.com)[abhishekgithub19@gmail.comgmail.com](mailto:youremail@example.com)
+- **Email:** [shobhitkori9@gmail.com](mailto:youremail@example.com)
+- [abhishekgithub19@gmail.comgmail.com](mailto:youremail@example.com)
 - **GitHub:** [Shobhit Kori](https://github.com/ShobhitKori) [AbhisheK Kahar](https://github.com/abhishek19kahar)
 
 ---
